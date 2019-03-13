@@ -5,10 +5,31 @@
     xmlns:local="using:Subtitler.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:ctrl="using:Subtitler.Models"
+    mc:Ignorable="d">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <AutoSuggestBox PlaceholderText="Type here" Grid.Row="0" Opacity=".7" QueryIcon="Find" Margin="0,12" MinWidth="280" QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                        BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <ListView Grid.Row="1" x:Name="SearchResultList" SelectionMode="None" 
+                  ItemClick="SearchResultList_OnItemClick" HorizontalAlignment="Stretch" IsItemClickEnabled="True" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="ctrl:Movies">
+                    <StackPanel Orientation="Vertical" BorderThickness="4,0,0,0" 
+                                BorderBrush="DodgerBlue" Padding="4" Margin="0,2">
+                        <controls:HeaderedTextBlock Header="{x:Bind Name}"
+                                                    Text="{x:Bind NumberOfSubtitle}" 
+                                                    VerticalAlignment="Center"
+                                                    Orientation="Vertical"/>
+                    </StackPanel>
 
-    <Grid>
-
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <controls:InAppNotification x:Load="False" Grid.Row="1" VerticalAlignment="Bottom" x:Name="notif" Tapped="notif_Tapped"/>
     </Grid>
 </Page>

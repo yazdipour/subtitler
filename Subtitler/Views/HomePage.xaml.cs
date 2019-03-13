@@ -8,5 +8,10 @@ namespace Subtitler.Views
         {
             this.InitializeComponent();
         }
+
+        private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -2,13 +2,63 @@
     x:Class="Subtitler.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Subtitler.Views"
+    xmlns:mdl="using:Subtitler.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d">
 
-    <Grid>
+    <controls:Carousel
+			x:Name="lightStone"
+			Height="{Binding ActualHeight, ElementName=Pg, Mode=OneWay}"
+			Margin="0,-30,0,0"
+			InvertPositive="True"
+			ItemDepth="250"
+			ItemMargin="-82"
+			ItemRotationX="0"
+			ItemRotationY="-53"
+			ItemRotationZ="10"
+			Orientation="Horizontal"
+			SelectedIndex="0">
+        <controls:Carousel.EasingFunction>
+            <CubicEase EasingMode="EaseOut" />
+        </controls:Carousel.EasingFunction>
+        <controls:Carousel.ItemTemplate>
+            <DataTemplate x:DataType="mdl:Movies">
+                <Grid x:Name="thumbnailImg"
+						MaxWidth="440"
+						Tag="{x:Bind Name}"
+						Tapped="Grid_Tapped">
+                    <controls:ImageEx
+							Width="320"
+							Height="440"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Center"
+							IsCacheEnabled="True"
+							PlaceholderSource="/Assets/_film_.jpg"
+							PlaceholderStretch="UniformToFill"
+							Source="{x:Bind ImgSrc, Mode=OneWay}"
+							Stretch="UniformToFill"
+							Tag="{x:Bind Name}" />
 
-    </Grid>
+                    <StackPanel
+							MaxWidth="300"
+							Margin="8,0,8,38"
+							Padding="4"
+							HorizontalAlignment="Left"
+							VerticalAlignment="Bottom"
+							Background="#99000000">
+                        <TextBlock
+								MaxWidth="320"
+								FontSize="18"
+								FontWeight="SemiLight"
+								Foreground="White"
+								Text="{x:Bind Name}"
+								TextAlignment="Left"
+								TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+        </controls:Carousel.ItemTemplate>
+    </controls:Carousel>
 </Page>

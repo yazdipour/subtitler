@@ -10,8 +10,60 @@
     PrimaryButtonText="Button1"
     SecondaryButtonText="Button2"
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
-
-    <Grid>
-    </Grid>
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick"
+    FontWeight="SemiLight" Loaded="Settings_OnLoaded">
+    <ContentDialog.Transitions>
+        <TransitionCollection>
+            <PaneThemeTransition Edge="Bottom" />
+        </TransitionCollection>
+    </ContentDialog.Transitions>
+    <ContentDialog.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="6"/>
+        </Style>
+        <Style TargetType="ToggleSwitch">
+            <Setter Property="IsOn" Value="True"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Grid.Column" Value="1"/>
+        </Style>
+        <Style TargetType="StackPanel">
+            <Setter Property="Orientation" Value="Horizontal"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,6"/>
+        </Style>
+    </ContentDialog.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="0,75,0,0"
+                HorizontalAlignment="Center">
+        <StackPanel>
+            <TextBlock Text="Default Subtitle Language:"/>
+            <Button Content="Change" Click="Button_Click" Width="80"/>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock Text="Where to save:"/>
+            <ComboBox HorizontalAlignment="Right" Width="140" SelectedIndex="0" Margin="0,4" 
+                      x:Name="saveLoc" >
+                <x:String>Videos Folder</x:String>
+                <x:String>Ask each time</x:String>
+                <x:String>Custom</x:String>
+            </ComboBox>
+        </StackPanel>
+        <!--<StackPanel>
+            <TextBlock Text="Server:"/>
+            <ComboBox HorizontalAlignment="Right" Width="140" SelectedIndex="0" Margin="0,4" x:Name="server">
+                <x:String>Subscence</x:String>
+                <x:String>Iran Server</x:String>
+            </ComboBox>
+        </StackPanel>-->
+        <StackPanel>
+            <TextBlock Text="Download Zip:"  />
+            <ToggleSwitch x:Name="sw_Zip" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <StackPanel>
+            <TextBlock Text="Light Theme:"  />
+            <ToggleSwitch x:Name="sw_theme" HorizontalAlignment="Left"/>
+        </StackPanel>
+    </StackPanel>
 </ContentDialog>
