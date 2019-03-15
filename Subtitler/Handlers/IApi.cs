@@ -11,7 +11,7 @@ namespace Subtitler.Handlers
         Task<ObservableCollection<Movies>> GetHome();
 
         [Get("/search.php")]
-        Task<ObservableCollection<Movies>> GetRetItem([AliasAs("q")] string query);
+        Task<ObservableCollection<Movies>> GetSearch([AliasAs("q")] string query);
 
         [Get("/movie.php")]
         //Task<T> GetMovieItems<T>([AliasAs("url")] string movieUrl, [AliasAs("lang")] int language = 0);

@@ -14,6 +14,8 @@ namespace Subtitler
             Loaded += (s, e) => iframe.Navigate(typeof(HomePage));
         }
 
+        public static bool IsLoading { get; internal set; }
+
         private async void Nav_Click(object sender, RoutedEventArgs e)
         {
             if (sender is AppBarButton btn)
