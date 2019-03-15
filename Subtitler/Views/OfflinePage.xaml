@@ -6,23 +6,21 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+    </Page.Resources>
     <Grid>
         <MediaElement Source="ms-appx:///Assets/err.mp4" 
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"
                       AutoPlay="True" IsMuted="True"
                       Opacity="0.4"/>
-        <StackPanel 
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
-            <TextBlock x:Name="msgLabel" 
-                   FontSize="20" Text="{x:Bind ErrText}"
-                   FontWeight="SemiLight"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"/>
-            <TextBlock Text="ERROR!!!" FontSize="42"
-                HorizontalAlignment="Center"
-                   FontWeight="Light"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="ERROR!!!" FontSize="42"/>
+            <TextBlock FontSize="20" x:Name="Message"/>
             <Button Content="Retry" 
                     Click="Button_Click"
                     HorizontalAlignment="Center"

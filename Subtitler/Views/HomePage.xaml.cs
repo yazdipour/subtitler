@@ -15,11 +15,13 @@ namespace Subtitler.Views
             if (HomeList.Count != 0) return;
             try
             {
+                if (!Microsoft.Toolkit.Uwp.Connectivity.NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                    throw new System.Exception("The Internet is not Available");
                 foreach (var m in await ApiHandler.Api.GetHome()) HomeList.Add(m);
             }
             catch (System.Exception ex)
             {
-                Frame.Navigate(typeof(OfflinePage), ex);
+                Frame.Navigate(typeof(OfflinePage), ex.Message);
             }
         }
 

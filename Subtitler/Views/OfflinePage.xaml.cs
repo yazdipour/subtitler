@@ -1,33 +1,21 @@
 ﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Subtitler.Views
 {
     public sealed partial class OfflinePage : Page
     {
-        private string ErrText = "No Connection";
-        public OfflinePage()
+        public OfflinePage() => InitializeComponent();
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.InitializeComponent();
+            base.OnNavigatedTo(e);
+            Message.Text = ((string)e.Parameter) ?? "Please Try Again";
         }
 
-
-        //protected override void OnNavigatedTo(NavigationEventArgs e)
-        //{
-        //    base.OnNavigatedTo(e);
-        //    ErrText = ((string)e.Parameter);
-        //    changeStatusBarColor();
-        //}
-
-        //protected override void OnNavigatedFrom(NavigationEventArgs e)
-        //{
-        //    base.OnNavigatedFrom(e);
-        //    changeStatusBarColor(false);
-        //}
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            if (Frame.CanGoBack)
-                Frame.GoBack();
+            if (Frame.CanGoBack) Frame.GoBack();
         }
-    
     }
 }
