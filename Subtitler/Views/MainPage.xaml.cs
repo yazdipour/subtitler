@@ -7,23 +7,32 @@ namespace Subtitler
 {
     public sealed partial class MainPage : Page
     {
-        public MainPage() => InitializeComponent();
+
+        public MainPage()
+        {
+            InitializeComponent();
+            Loaded += (s, e) => iframe.Navigate(typeof(HomePage));
+        }
 
         private async void Nav_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn)
-                switch (btn.Content)
+            if (sender is AppBarButton btn)
+            {
+                switch (btn.Tag.ToString())
                 {
                     case "Home":
-                        if (iframe.SourcePageType != typeof(HomePage)) iframe.Navigate(typeof(HomePage));
+                        if (iframe.SourcePageType != typeof(HomePage))
+                            iframe.Navigate(typeof(HomePage));
                         break;
-                    case "Search":
-                        if (iframe.SourcePageType != typeof(SearchPage)) iframe.Navigate(typeof(SearchPage));
+                    case "Find":
+                        if (iframe.SourcePageType != typeof(SearchPage))
+                            iframe.Navigate(typeof(SearchPage));
                         break;
-                    case "Settings":
+                    case "Setting":
                         await new SettingsDialog().ShowAsync();
                         break;
                 }
+            }
         }
     }
 }

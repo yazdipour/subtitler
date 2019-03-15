@@ -1,9 +1,12 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Subtitler.Models;
+using Windows.UI.Xaml.Controls;
 
 namespace Subtitler.Views
 {
     public sealed partial class SettingsDialog : ContentDialog
     {
+
+        Settings settings = Handlers.SettingsHandler.Settings;
         public SettingsDialog()
         {
             this.InitializeComponent();
@@ -11,20 +14,11 @@ namespace Subtitler.Views
 
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            //Save
-        }
-
         private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             //Close
         }
 
-        private void Settings_OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-
-        }
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

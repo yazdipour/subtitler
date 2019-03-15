@@ -135,7 +135,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="Assets\err.mp4" />
-    <Content Include="Assets\MKristall.ttf" />
     <None Include="Subtitler_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -197,10 +196,12 @@
     <Content Include="Assets\StoreLogo.scale-150.png" />
     <Content Include="Assets\StoreLogo.scale-200.png" />
     <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Title.png" />
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Assets\_donate.png" />
     <Content Include="Assets\_film_.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

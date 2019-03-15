@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    NavigationCacheMode="Enabled"
+    Loaded="HomePage_LoadedAsync"
     mc:Ignorable="d">
 
     <controls:Carousel
 			x:Name="lightStone"
-			Height="{Binding ActualHeight, ElementName=Pg, Mode=OneWay}"
-			Margin="0,-30,0,0"
 			InvertPositive="True"
 			ItemDepth="250"
 			ItemMargin="-82"
@@ -19,6 +19,7 @@
 			ItemRotationY="-53"
 			ItemRotationZ="10"
 			Orientation="Horizontal"
+            ItemsSource="{x:Bind HomeList}"
 			SelectedIndex="0">
         <controls:Carousel.EasingFunction>
             <CubicEase EasingMode="EaseOut" />
@@ -32,6 +33,7 @@
                     <controls:ImageEx
 							Width="320"
 							Height="440"
+                            CornerRadius="16"
 							HorizontalAlignment="Center"
 							VerticalAlignment="Center"
 							IsCacheEnabled="True"

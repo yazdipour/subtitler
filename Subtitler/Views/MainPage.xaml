@@ -5,20 +5,50 @@
     xmlns:local="using:Subtitler"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
-
+    mc:Ignorable="d" 
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+	extensions:ApplicationViewExtensions.ExtendViewIntoTitleBar="True"
+	extensions:TitleBarExtensions.BackgroundColor="Transparent"
+	extensions:TitleBarExtensions.ButtonBackgroundColor="Transparent"
+	extensions:TitleBarExtensions.ButtonForegroundColor="White"
+	extensions:TitleBarExtensions.ForegroundColor="White"
+	extensions:TitleBarExtensions.InactiveBackgroundColor="Transparent"
+    Background="{ThemeResource SystemControlAcrylicWindowBrush}">
     <Grid>
         <Grid.RowDefinitions>
+            <!--Title-->
+            <RowDefinition Height="Auto"/>
             <!--NAV-->
             <RowDefinition Height="*"/>
             <!--Frame-->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Frame x:Name="iframe" Grid.Row="0"/>
-        <StackPanel Grid.Row="1">
-            <Button Content="Home" Click="Nav_Click"/>
-            <Button Content="Search" Click="Nav_Click"/>
-            <Button Content="Settings" Click="Nav_Click"/>
+        <Image Margin="0 24 0 0" HorizontalAlignment="Center"
+               Source="/Assets/Title.png" Height="46"/>
+        <Frame x:Name="iframe" Grid.Row="1"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    Margin="0 8" Padding="8" CornerRadius="8"
+                    HorizontalAlignment="Center"
+                    Background="#161616" Spacing="8">
+            <StackPanel.Resources>
+                <Style TargetType="AppBarButton">
+                    <Setter Property="Height" Value="46"/>
+                    <Setter Property="Width" Value="62"/>
+                    <Setter Property="LabelPosition" Value="Collapsed"/>
+                </Style>
+            </StackPanel.Resources>
+            <AppBarButton Tag="Home" 
+                          Icon="Home" 
+                          Label="Home" 
+                          Click="Nav_Click"/>
+            <AppBarButton Tag="Find" 
+                          Icon="Find" 
+                          Label="Find"
+                          Click="Nav_Click"/>
+            <AppBarButton Tag="Setting" 
+                          Icon="Setting"
+                          Label="Settings" 
+                          Click="Nav_Click"/>
         </StackPanel>
     </Grid>
 </Page>
