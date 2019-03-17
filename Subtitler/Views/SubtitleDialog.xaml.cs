@@ -1,83 +1,65 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Subtitler.Handlers;
+using Subtitler.Models;
+using System;
+using System.Threading;
+using Windows.UI.Xaml.Controls;
 
 namespace Subtitler.Views
 {
     public sealed partial class SubtitleDialog : ContentDialog
     {
-        public SubtitleDialog()
-        {
-            this.InitializeComponent();
-        }
-        
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
+        private Subtitle Subtitle { get; set; }
+        private string downloadLink;
 
-        }
-
-        private void Close_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        public SubtitleDialog(object subtitle)
         {
-            Hide();
+            InitializeComponent();
+            Subtitle = (Subtitle)subtitle;
         }
 
-        private void Dl_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Close_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e) => Hide();
+
+        private async void Dl_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            //if (BDl.Content?.ToString() != "Cancel")
-            //{
-            //    BClose.IsEnabled = false;
-            //    BDl.Content = "Cancel";
-            //    BDl.Background = new SolidColorBrush(Colors.Red);
-            //    PBar.IsIndeterminate = true;
-            //    PBar.Visibility = Visibility.Visible;
-            //    try
-            //    {
-            //        //START 
-            //        ToastIt(await HandleOnlineServices.DownloadSubtitle(_dlLink, _item.Name,
-            //            new CancellationToken(false)) ? "✔Completed" : "✖Failed!", _item.Name);
-            //    }
-            //    catch { }
-            //    CancelEffect();
-            //}
-            //else
-            //{
-            //    CancelEffect();
-            //}
+            if (DownloadButton.Content?.ToString().Equals("Cancel") == true)
+            {
+                BClose.IsEnabled = true;
+                DownloadButton.Content = "Download";
+                return;
+            }
+            BClose.IsEnabled = false;
+            DownloadButton.Content = "Cancel";
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(downloadLink))
+                {
+                    var downloadResult = await ApiHandler.DownloadSubtitle(downloadLink,
+                        Subtitle.Name, !SettingsHandler.Settings.ZipIt, new CancellationToken(false));
+                    Utils.CreateA2LineToast(Subtitle.Name, downloadResult ? "✔Download Completed" : "✖Failed!");
+                }
+
+            }
+            finally { Dl_Click(sender, e); }
         }
 
-        private void ContentDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void ContentDialog_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            //BDl.IsEnabled = false;
-            //try
-            //{
-            //    var byteArray = await BlobCache.InMemory.DownloadUrl(App.BASE_URL + "/dl_page.php?url=" + _item.Url);
-            //    string str = System.Text.Encoding.UTF8.GetString(byteArray);
-            //    var res = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(str);
-            //    Releaseinfo.Text = res[0].Replace("\t", "").Trim();
-            //    var pos = res[1].LastIndexOf(@"?mac=", StringComparison.Ordinal);
-            //    _dlLink = App.BASE_URL + "/downloadlink.php" + res[1].Substring(pos);
-            //    BDl.IsEnabled = true;
-            //}
-            //catch (TimeoutException)
-            //{
-            //    Releaseinfo.Text = "Error! TimeOut!";
-            //    Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Exception in DlPage 1");
-            //}
-            //catch (Exception)
-            //{
-            //    Releaseinfo.Text = "Error just happened!";
-            //    Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Exception in DlPage 2");
-            //}
-            //PBar.Visibility = Visibility.Collapsed;
-            //_cts = null;
-        }
-
-        private void DownloadPage_OnSizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
-        {
-            //sc.Height = e.NewSize.Height - 180;
-        }
-
-        private void ContentDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
-        {
-
+            try
+            {
+                var linkAndTitle = await ApiHandler.Api.GetSubtitleLinks(Subtitle.Url);
+                Releaseinfo.Text = linkAndTitle[0].Replace("  ", "").Trim();
+                var macId = linkAndTitle[1].LastIndexOf(@"?mac=", StringComparison.Ordinal);
+                downloadLink = R.DOWNLOAD_LINK(linkAndTitle[1].Substring(macId));
+                DownloadButton.IsEnabled = true;
+            }
+            catch (TimeoutException)
+            {
+                Releaseinfo.Text = "Error! TimeOut!";
+            }
+            catch (Exception)
+            {
+                Releaseinfo.Text = "Error just happened!";
+            }
         }
     }
 }

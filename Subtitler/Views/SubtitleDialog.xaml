@@ -5,13 +5,10 @@
     xmlns:local="using:Subtitler.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    SizeChanged="DownloadPage_OnSizeChanged"
-    Loaded="ContentDialog_Loaded"
-    RequestedTheme="Dark"
     Title="Download" 
-    Closed="ContentDialog_Closed">
-
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    Loaded="ContentDialog_Loaded">
     <ContentDialog.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -20,21 +17,15 @@
         </Style>
     </ContentDialog.Resources>
     <ContentDialog.Background>
-        <!--TODO: Add Transparency-->
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#2b5876" Offset="0"/>
-            <GradientStop Color="#4e4376" Offset="1"/>
+            <GradientStop Color="#ff2b5876" Offset="0"/>
+            <GradientStop Color="#7f4e4376" Offset="1"/>
         </LinearGradientBrush>
     </ContentDialog.Background>
-    <ScrollViewer x:Name="sc">
-        <StackPanel>
-            <TextBlock x:Name="Releaseinfo" TextWrapping="Wrap"/>
-            <Button x:Name="BDl" Content="Download" Background="DodgerBlue" Click="Dl_Click"/>
-            <Button x:Name="BClose"  Content="Close" Click="Close_Click"/>
-            <ProgressBar x:Name="PBar" Height="10" VerticalAlignment="Stretch" 
-                         Margin="0,10,0,0" Foreground="#FF2DDE11" Value="-1"
-                         SmallChange="1" LargeChange="10" IsIndeterminate="True"/>
-
-        </StackPanel>
-    </ScrollViewer>
+    <StackPanel>
+        <TextBlock x:Name="Releaseinfo" TextWrapping="Wrap" MaxLines="2"/>
+        <Button x:Name="DownloadButton" Content="Download" IsEnabled="False"
+                Background="DodgerBlue" Click="Dl_Click"/>
+        <Button x:Name="BClose" Content="Close" Click="Close_Click"/>
+    </StackPanel>
 </ContentDialog>

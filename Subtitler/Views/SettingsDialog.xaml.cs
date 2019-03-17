@@ -1,28 +1,18 @@
-﻿using Subtitler.Models;
+﻿using System;
+using Subtitler.Models;
 using Windows.UI.Xaml.Controls;
 
 namespace Subtitler.Views
 {
     public sealed partial class SettingsDialog : ContentDialog
     {
+        private Settings settings = Handlers.SettingsHandler.Settings;
+        public SettingsDialog() => InitializeComponent();
 
-        Settings settings = Handlers.SettingsHandler.Settings;
-        public SettingsDialog()
+        private async void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            this.InitializeComponent();
-            //            var list = JsonConvert.DeserializeObject<List<string>>(LocalSettingManager.ReadSetting("SLang2"));
-
-        }
-
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            //Close
-        }
-
-
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-
+            Hide();
+            await new LangDialog().ShowAsync();
         }
     }
 }

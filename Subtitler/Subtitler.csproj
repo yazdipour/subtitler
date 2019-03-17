@@ -102,6 +102,9 @@
     <Compile Include="Handlers\R.cs" />
     <Compile Include="Handlers\SettingsHandler.cs" />
     <Compile Include="Handlers\Utils.cs" />
+    <Compile Include="Views\LangDialog.xaml.cs">
+      <DependentUpon>LangDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -215,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\LangDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

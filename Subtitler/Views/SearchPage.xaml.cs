@@ -9,13 +9,13 @@ namespace Subtitler.Views
 {
     public sealed partial class SearchPage : Page
     {
-        private ObservableCollection<Movies> SearchList = new ObservableCollection<Movies>();
+        private ObservableCollection<Movie> SearchList = new ObservableCollection<Movie>();
         public SearchPage() => InitializeComponent();
 
         private void SearchResultList_OnItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is Movies movies)
-                Frame.Navigate(typeof(MoviePage), movies);
+            if (e.ClickedItem is Movie movie)
+                Frame.Navigate(typeof(MoviePage), movie);
         }
 
         private async void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
@@ -26,7 +26,7 @@ namespace Subtitler.Views
                 if (string.IsNullOrWhiteSpace(text)) return;
                 MainPage.IsLoading = true;
                 sender.IsEnabled = false;
-                foreach (var movies in await ApiHandler.Api.GetSearch(text)) SearchList.Add(movies);
+                foreach (var movie in await ApiHandler.Api.GetSearch(text)) SearchList.Add(movie);
             }
             catch
             {

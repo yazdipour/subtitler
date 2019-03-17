@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Windows.Networking.BackgroundTransfer;
@@ -11,7 +12,12 @@ namespace Subtitler.Handlers
     class ApiHandler
     {
         private static IApi api;
-        public static IApi Api => api ?? (api = Refit.RestService.For<IApi>(R.BASE_URL));
+
+        public static IApi Api => api ?? (api = Refit.RestService.For<IApi>(new HttpClient
+        {
+            BaseAddress = new Uri(R.BASE_URL),
+            Timeout = TimeSpan.FromMinutes(1)
+        }));
 
         private static async Task<bool> Download(string url, string fileName,
             StorageFolder destinationFolder, CancellationToken token)
@@ -31,7 +37,8 @@ namespace Subtitler.Handlers
             catch { return false; }
         }
 
-        public static async Task<bool> DownloadSubtitle(string url, string name, CancellationToken token)
+        public static async Task<bool> DownloadSubtitle(string url, string name,
+            bool unzipIt, CancellationToken token)
         {
             StorageFolder folder = await new FolderPicker
             {
@@ -44,8 +51,7 @@ namespace Subtitler.Handlers
             {
                 name = Path.GetFileNameWithoutExtension(name) + ".zip";
                 var result = await Download(url, name, folder, token);
-                if (result && !SettingsHandler.Settings.ZipIt)
-                    Utils.Unzip(name, folder);
+                if (result && unzipIt) Utils.Unzip(name, folder);
                 return result;
             }
             catch { }

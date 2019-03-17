@@ -7,31 +7,29 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:classes="using:Subtitler.Models"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    Loaded="Page_Loaded"
 	mc:Ignorable="d">
     <ListView
-		Name="Itms"
+        ItemsSource="{x:Bind SubtitleList, Mode=OneWay}"
 		IsItemClickEnabled="True"
 		ItemClick="Body_ItemClick"
+        x:Name="SubtitlesListView"
 		ScrollViewer.HorizontalScrollMode="Disabled"
 		ScrollViewer.VerticalScrollMode="Auto"
 		SelectionMode="None">
         <ListView.Header>
             <controls:ScrollHeader Mode="Fade">
-                <StackPanel>
+                <Grid HorizontalAlignment="Center">
                     <controls:DropShadowPanel
 						MinWidth="380"
-						Margin="24,28,24,14"
+						Margin="16 16 16 42"
 						Padding="16"
 						HorizontalAlignment="Center"
 						HorizontalContentAlignment="Stretch"
-						BlurRadius="8.0"
-						OffsetX="0"
-						OffsetY="1"
-						ShadowOpacity="0.3">
+						BlurRadius="8">
                         <Grid
+                            CornerRadius="8"
 							Height="320"
-							Background="White"
+							Background="{ThemeResource SystemControlAcrylicElementBrush}"
 							RequestedTheme="Light">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -51,106 +49,110 @@
 								IsCacheEnabled="True"
 								PlaceholderSource="/Assets/_film_.jpg"
 								PlaceholderStretch="UniformToFill"
-								Stretch="UniformToFill" />
-                            <!--Source="{x:Bind _param.ImgSrc}"-->
+								Stretch="UniformToFill" 
+                                Source="{x:Bind Movie.ImgSrc, Mode=OneWay}"/>
 
                             <AppBarButton
-								x:Name="X"
 								Grid.RowSpan="2"
 								Grid.Column="1"
 								Width="48"
 								Height="48"
 								HorizontalAlignment="Right"
 								VerticalAlignment="Top"
-								Click="ButtonBase_OnClick"
+								Click="Refresh_OnClick"
 								Foreground="Black"
 								Icon="Refresh" />
-                            <AppBarToggleButton
-								x:Name="FavBtn"
-								Grid.Row="1"
-								Grid.Column="1"
-								Width="48"
-								Height="48"
-								HorizontalAlignment="Right"
-								VerticalAlignment="Bottom"
-								Foreground="Black"
-								RequestedTheme="Dark">
-                                <AppBarToggleButton.Icon>
-                                    <FontIcon x:Name="LoveIcon" Glyph="&#xE00B;" />
-                                </AppBarToggleButton.Icon>
-                            </AppBarToggleButton>
 
+                            <StackPanel
+								    HorizontalAlignment="Right"
+								    VerticalAlignment="Bottom"
+								    RequestedTheme="Dark"
+                                    Orientation="Horizontal"
+								    Grid.Row="1"
+								    Grid.Column="1">
+                                <AppBarButton
+                                    Icon="Character"
+								    Width="48"
+								    Height="48"
+								    Click="ChangeLanguage_Click"
+								    Content="Change Language"
+								    Foreground="Black" />
+
+                                <AppBarToggleButton
+								    x:Name="FavBtn"
+								    Width="48"
+								    Height="48"
+								    Click="Fav_OnClick"
+								    Foreground="Black"
+                                    IsChecked="{x:Bind Movie.IsFav, Mode=TwoWay}"
+                                    Icon="Favorite"/>
+                            </StackPanel>
 
                             <StackPanel
 								Grid.Row="0"
 								Grid.Column="1"
-								Height="100"
-								MinWidth="280"
 								Margin="4,36,0,16">
-                                <TextBlock
-									x:Name="TitleName"
-									Margin="0,0,12,0"
+                                <TextBlock Text="{x:Bind Movie.Name, Mode=OneWay}" 
+									Margin="0,0,12,0" MaxWidth="400" MaxLines="2"
 									Style="{ThemeResource HeaderTextBlockStyle}"
-									TextWrapping="NoWrap" />
-                                <TextBlock x:Name="TitleYear" Style="{ThemeResource BodyTextBlockStyle}" />
-                            </StackPanel>
-                            <StackPanel
-								Grid.Row="1"
-								Grid.Column="1"
-								Height="180"
-								Margin="8">
-                                <Button
-									Width="140"
-									Background="#333"
-									Click="ChangeLanguage_Click"
-									Content="Change Language"
-									Foreground="White" />
-                                <Button
-									Width="140"
-									Margin="0,8"
-									Background="#333"
-									Click="Imdb_Click"
-									Foreground="Yellow">
-                                    <BitmapIcon Height="24" UriSource="ms-appx:///Assets/Icons/imdb-white.png" />
-                                </Button>
+									TextWrapping="Wrap" />
+                                <TextBlock Text="{x:Bind Movie.Year, Mode=OneWay}" MaxWidth="400"
+                                           Style="{ThemeResource BodyTextBlockStyle}" />
+                                <HyperlinkButton Content="Link to Subscence" MaxWidth="400"
+                                                 NavigateUri="{x:Bind Movie.SubsceneUrl, Mode=OneWay}"/>
                             </StackPanel>
                         </Grid>
                     </controls:DropShadowPanel>
+
+                    <!--BackButton-->
+                    <Border CornerRadius="20" 
+                            Margin="0 0 16 0"
+                            Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}"
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Top">
+                        <AppBarButton Icon="Back" Label="Back" Click="BackButton_Click"/>
+                    </Border>
+
+                    <!--SearchBox-->
                     <SearchBox
 						Width="340"
-						Margin="36,8"
+                        Margin="0 16 0 0"
 						HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
 						Background="White"
 						PlaceholderText="E01"
 						QuerySubmitted="SearchBox_QuerySubmitted" />
-                </StackPanel>
+                </Grid>
             </controls:ScrollHeader>
         </ListView.Header>
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+        </ListView.ItemContainerStyle>
         <ListView.ItemTemplate>
-            <DataTemplate>
-                <Grid
+            <DataTemplate x:DataType="classes:Subtitle">
+                <StackPanel
 					MinWidth="320"
 					Margin="4,0,0,0"
 					Padding="0,4"
-					Tag="{Binding Url}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="32" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                    Spacing="12"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+					Tag="{x:Bind Url}">
                     <SymbolIcon
-						Grid.Column="0"
-						Foreground="{Binding Rate}"
+						Foreground="{x:Bind Rate}"
 						Symbol="Favorite" />
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Orientation="Vertical">
                         <TextBlock
-							Text="{Binding Name}"
+							Text="{x:Bind Name}"
 							TextWrapping="Wrap" />
                         <TextBlock
 							FontSize="12"
 							FontWeight="Light"
-							Text="{Binding Owner}" />
+							Text="{x:Bind Owner}" />
                     </StackPanel>
-                </Grid>
+                </StackPanel>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

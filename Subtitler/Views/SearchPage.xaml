@@ -20,7 +20,7 @@
                   ItemClick="SearchResultList_OnItemClick" HorizontalAlignment="Stretch" 
                   IsItemClickEnabled="True">
             <ListView.ItemTemplate>
-                <DataTemplate x:DataType="ctrl:Movies">
+                <DataTemplate x:DataType="ctrl:Movie">
                     <controls:HeaderedTextBlock Header="{x:Bind Name}"
                                                     Text="{x:Bind NumberOfSubtitle}" 
                                                     Margin="4"

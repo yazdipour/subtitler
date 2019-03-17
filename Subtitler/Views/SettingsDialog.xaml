@@ -7,8 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="SETTINGS"
-    SecondaryButtonText="Close"
-    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    SecondaryButtonText="Close">
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Spacing="4">
         <StackPanel Orientation="Horizontal" Spacing="8">
             <TextBlock Text="Subtitles Language:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -28,9 +27,11 @@
         <TextBlock>
             Developer: <Hyperlink NavigateUri="https://yazdipour.github.io">Shahriar Yazdipour</Hyperlink>
             <LineBreak/>Open Source Repo: <Hyperlink NavigateUri="https://github.com/yazdipour/subtitler">github/yazdipour/subtitler</Hyperlink>
-            <LineBreak/><LineBreak/>Thanks <Hyperlink NavigateUri="http://subscene.com">http://subscene.com</Hyperlink> for providing subtitles
+            <LineBreak/><Hyperlink NavigateUri="https://yazdipour.github.io/policy.html">Privacy and Policy</Hyperlink>
+            <LineBreak/>Thanks <Hyperlink NavigateUri="http://subscene.com">http://subscene.com</Hyperlink> for providing subtitles
         </TextBlock>
 
+        <TextBlock Text="DONATE" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0 16 0 0"/>
         <HyperlinkButton HorizontalAlignment="Center" NavigateUri="https://buymeacoff.ee/XrTW5YQDy">
             <Image Height="32" Source="/Assets/_donate.png"/>
         </HyperlinkButton>

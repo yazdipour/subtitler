@@ -25,7 +25,7 @@
             <CubicEase EasingMode="EaseOut" />
         </controls:Carousel.EasingFunction>
         <controls:Carousel.ItemTemplate>
-            <DataTemplate x:DataType="mdl:Movies">
+            <DataTemplate x:DataType="mdl:Movie">
                 <Grid x:Name="thumbnailImg"
 						MaxWidth="440"
 						Tag="{x:Bind Name}"

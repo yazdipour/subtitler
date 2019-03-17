@@ -7,7 +7,7 @@ namespace Subtitler.Views
 {
     public sealed partial class HomePage : Page
     {
-        private ObservableCollection<Movies> HomeList = new ObservableCollection<Movies>();
+        private ObservableCollection<Movie> HomeList = new ObservableCollection<Movie>();
         public HomePage() => InitializeComponent();
         private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
             => Frame.Navigate(typeof(MoviePage), HomeList[lightStone.SelectedIndex]);

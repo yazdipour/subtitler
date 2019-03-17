@@ -3,7 +3,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Data.Xml.Dom;
 using Windows.Storage;
+using Windows.UI.Notifications;
 using Windows.UI.Popups;
 
 namespace Subtitler.Handlers
@@ -81,6 +83,20 @@ namespace Subtitler.Handlers
                     await outputFileStream.FlushAsync();
                 }
             }
+        }
+
+        public static void CreateA2LineToast(string title, string subtitle)
+        {
+            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+            var toastTextElements = toastXml.GetElementsByTagName("text");
+            toastTextElements[0].AppendChild(toastXml.CreateTextNode(title));
+            toastTextElements[1].AppendChild(toastXml.CreateTextNode(subtitle));
+            // Set the duration on the toast
+            var toastNode = toastXml.SelectSingleNode("/toast");
+            ((XmlElement)toastNode)?.SetAttribute("duration", "long");
+            // Create the actual toast object using this toast specification.
+            var toast = new ToastNotification(toastXml);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
 }

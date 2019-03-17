@@ -8,14 +8,13 @@ namespace Subtitler.Handlers
     interface IApi
     {
         [Get("/home.php")]
-        Task<ObservableCollection<Movies>> GetHome();
+        Task<ObservableCollection<Movie>> GetHome();
 
         [Get("/search.php")]
-        Task<ObservableCollection<Movies>> GetSearch([AliasAs("q")] string query);
+        Task<ObservableCollection<Movie>> GetSearch([AliasAs("q")] string query);
 
         [Get("/movie.php")]
-        //Task<T> GetMovieItems<T>([AliasAs("url")] string movieUrl, [AliasAs("lang")] int language = 0);
-        Task<(Movies, Subtitle[])> GetMovieItems([AliasAs("url")] string movieUrl, [AliasAs("lang")] int language = 0);
+        Task<T> GetMovieItems<T>([AliasAs("url")] string movieUrl, [AliasAs("lang")] int language = 0);
 
         [Get("/links.php")]
         Task<string[]> GetSubtitleLinks([AliasAs("url")] string subtitleUrl);
