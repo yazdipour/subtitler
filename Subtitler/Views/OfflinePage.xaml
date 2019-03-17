@@ -19,7 +19,7 @@
                       AutoPlay="True" IsMuted="True"
                       Opacity="0.4"/>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <TextBlock Text="ERROR!!!" FontSize="42"/>
+            <TextBlock Text="Error! Please Try Again" FontSize="42"/>
             <TextBlock FontSize="20" x:Name="Message"/>
             <Button Content="Retry" 
                     Click="Button_Click"

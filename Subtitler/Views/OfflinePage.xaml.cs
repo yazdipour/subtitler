@@ -10,7 +10,7 @@ namespace Subtitler.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            Message.Text = ((string)e.Parameter) ?? "Please Try Again";
+            Message.Text = ((string)e.Parameter) ?? "Opss! Something happend";
         }
 
         private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
