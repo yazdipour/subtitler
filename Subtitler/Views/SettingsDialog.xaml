@@ -11,8 +11,7 @@
     <ContentDialog.Resources>
         <Style TargetType="TextBlock" x:Key="Title">
             <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="TextDecorations" Value="Underline"/>
-            <Setter Property="Margin" Value="0 8"/>
+            <Setter Property="Margin" Value="0 4"/>
         </Style>
     </ContentDialog.Resources>
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Spacing="4">
@@ -33,8 +32,11 @@
         <TextBlock>
             💠Developer: <Hyperlink NavigateUri="https://yazdipour.github.io">Shahriar Yazdipour</Hyperlink>
             <LineBreak/>💠Open Source Repo: <Hyperlink NavigateUri="https://github.com/yazdipour/subtitler">github/yazdipour/subtitler</Hyperlink>
-            <LineBreak/>💠<Hyperlink NavigateUri="https://yazdipour.github.io/policy.html">Privacy and Policy</Hyperlink>
+            <LineBreak/>💠Version: <Run Text="{x:Bind VERSION}"/>
         </TextBlock>
+
+        <TextBlock Text="RATE SUBTITLER" Style="{StaticResource Title}"/>
+        <RatingControl Tapped="RatingControl_Tapped" PlaceholderValue="3.5"/>
 
         <TextBlock Text="DONATE" Style="{StaticResource Title}"/>
         <HyperlinkButton HorizontalAlignment="Center" NavigateUri="https://buymeacoff.ee/XrTW5YQDy">

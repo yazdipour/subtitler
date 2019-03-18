@@ -14,7 +14,7 @@ namespace Subtitler.Views
     {
         private Movie Movie { get; set; }
         private ObservableCollection<Subtitle> SubtitleList = new ObservableCollection<Subtitle>();
-
+        private bool firstTime = true;
         public MoviePage() => InitializeComponent();
 
         private void ReloadPage()
@@ -26,19 +26,37 @@ namespace Subtitler.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (e.Parameter is Movie movie) await LoadItemsAsync(Movie = movie);
+            if (e?.Parameter is Movie movie) await LoadItemsAsync(Movie = movie);
         }
 
         private async Task LoadItemsAsync(Movie movie)
         {
             try
             {
-                var json = await ApiHandler.Api.GetMovieItems<MovieWithSubtitles>(movie.Url);
-                if (!string.IsNullOrWhiteSpace(json.Movie.ImgSrc)) Movie.ImgSrc = json.Movie.ImgSrc;
-                if (!string.IsNullOrWhiteSpace(json.Movie.Year)) Movie.Year = json.Movie.Year;
-                foreach (var item in json.Subtitles) SubtitleList.Add(item);
+                MainPage.IsLoading = true;
+                var json = await ApiHandler.Api.GetMovieItems<MovieWithSubtitles>(movie?.Url);
+                if (json?.Subtitles?.Length == 0)
+                {
+                    if (firstTime) await LoadItemsAsync(movie);
+                    firstTime = false;
+                    return;
+                }
+                if (!string.IsNullOrWhiteSpace(json?.Movie?.ImgSrc)) Movie.ImgSrc = json.Movie.ImgSrc;
+                if (!string.IsNullOrWhiteSpace(json?.Movie?.Year)) Movie.Year = json.Movie.Year;
+                foreach (var item in json?.Subtitles) SubtitleList.Add(item);
             }
-            catch { }
+            catch (Exception e)
+            {
+                var dialog = new Windows.UI.Popups.MessageDialog(e.Message);
+                dialog.Title = "☢Error!";
+                dialog.Content = "Error Log: " + e.Message;
+                dialog.Commands.Add(new Windows.UI.Popups.UICommand("Aha"));
+                await dialog.ShowAsync();
+            }
+            finally
+            {
+                MainPage.IsLoading = false;
+            }
         }
 
         private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)

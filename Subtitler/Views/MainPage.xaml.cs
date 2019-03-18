@@ -2,11 +2,13 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System;
+using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace Subtitler
 {
     public sealed partial class MainPage : Page
     {
+        private static Loading loadingControl;
 
         public MainPage()
         {
@@ -16,9 +18,14 @@ namespace Subtitler
                 await Handlers.SettingsHandler.InitAsync();
                 iframe.Navigate(typeof(HomePage));
             };
+            loadingControl = LoadingControl;
         }
 
-        public static bool IsLoading { get; internal set; }
+        public static bool IsLoading
+        {
+            set => loadingControl.IsLoading = value;
+            get => loadingControl.IsLoading;
+        }
 
         private async void Nav_Click(object sender, RoutedEventArgs e)
         {

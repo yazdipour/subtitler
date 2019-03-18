@@ -79,6 +79,7 @@
 								    Foreground="Black" />
 
                                 <AppBarToggleButton
+                                    Visibility="Collapsed"
 								    x:Name="FavBtn"
 								    Width="48"
 								    Height="48"

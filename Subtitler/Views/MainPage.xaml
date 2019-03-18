@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" 
     xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-	extensions:ApplicationViewExtensions.ExtendViewIntoTitleBar="True"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    extensions:ApplicationViewExtensions.ExtendViewIntoTitleBar="True"
 	extensions:TitleBarExtensions.BackgroundColor="Transparent"
 	extensions:TitleBarExtensions.ButtonBackgroundColor="Transparent"
 	extensions:TitleBarExtensions.ButtonForegroundColor="White"
@@ -50,5 +51,8 @@
                           Label="Settings" 
                           Click="Nav_Click"/>
         </StackPanel>
+        <controls:Loading x:Name="LoadingControl" Background="#7f000000" IsLoading="True" Grid.RowSpan="3">
+            <ProgressRing IsActive="True" Foreground="White" Height="48" Width="48"/>
+        </controls:Loading>
     </Grid>
 </Page>
