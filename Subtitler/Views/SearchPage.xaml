@@ -14,20 +14,26 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <AutoSuggestBox PlaceholderText="Type here" Grid.Row="0" Opacity=".7" QueryIcon="Find" Margin="0,12" MinWidth="280" QuerySubmitted="AutoSuggestBox_QuerySubmitted"
-                        BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <Border Grid.Row="0" Margin="0,12" CornerRadius="4" Background="White" MaxWidth="320">
+            <AutoSuggestBox PlaceholderText="Search here" 
+                            QueryIcon="Find" MinWidth="280" Margin="-2"
+                            QuerySubmitted="AutoSuggestBox_QuerySubmitted"
+                            BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        </Border>
         <ListView Grid.Row="1" ItemsSource="{x:Bind SearchList}" SelectionMode="None" 
                   ItemClick="SearchResultList_OnItemClick" HorizontalAlignment="Stretch" 
                   IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="ctrl:Movie">
                     <controls:HeaderedTextBlock Header="{x:Bind Name}"
                                                     Text="{x:Bind NumberOfSubtitle}" 
-                                                    Margin="4"
-                                                    VerticalAlignment="Center"
-                                                    BorderThickness="4,0,0,0" 
-                                                    BorderBrush="DodgerBlue"
-                                                    Orientation="Vertical"/>
+                                                    HorizontalAlignment="Center"
+                                                    Orientation="Horizontal"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

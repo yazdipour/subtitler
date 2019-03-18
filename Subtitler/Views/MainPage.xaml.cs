@@ -11,7 +11,11 @@ namespace Subtitler
         public MainPage()
         {
             InitializeComponent();
-            Loaded += (s, e) => iframe.Navigate(typeof(HomePage));
+            Loaded += async (s, e) =>
+            {
+                await Handlers.SettingsHandler.InitAsync();
+                iframe.Navigate(typeof(HomePage));
+            };
         }
 
         public static bool IsLoading { get; internal set; }

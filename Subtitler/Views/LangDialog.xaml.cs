@@ -8,7 +8,7 @@ namespace Subtitler.Views
     {
         public LangDialog()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Tag = false;
         }
 
@@ -18,9 +18,10 @@ namespace Subtitler.Views
             LangList.SelectedIndex = SettingsHandler.Settings.Language;
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        private async void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             SettingsHandler.Settings.Language = LangList.SelectedIndex;
+            await SettingsHandler.CacheSettingsAsync();
             Tag = true;
         }
     }

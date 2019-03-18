@@ -14,5 +14,8 @@ namespace Subtitler.Views
             Hide();
             await new LangDialog().ShowAsync();
         }
+
+        private async void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+            => await Handlers.SettingsHandler.CacheSettingsAsync();
     }
 }

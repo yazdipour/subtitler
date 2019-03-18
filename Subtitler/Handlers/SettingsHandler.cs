@@ -12,7 +12,7 @@ namespace Subtitler.Handlers
             set { settings = value; }
         }
 
-        public static async Task InitSettingsAsync()
+        public static async Task InitAsync()
         {
             if (!await CacheHandler.Cache.Exist(R.SETTINGS_KEY)) return;
             settings = await CacheHandler.Cache.GetObject<Settings>(R.SETTINGS_KEY);

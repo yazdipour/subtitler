@@ -114,14 +114,16 @@
                     </Border>
 
                     <!--SearchBox-->
-                    <SearchBox
-						Width="340"
-                        Margin="0 16 0 0"
-						HorizontalAlignment="Center"
-                        VerticalAlignment="Bottom"
-						Background="White"
-						PlaceholderText="E01"
-						QuerySubmitted="SearchBox_QuerySubmitted" />
+                    <Border HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom"
+						    Margin="0 16 0 0" CornerRadius="4">
+                        <SearchBox
+						    MinWidth="340"
+						    PlaceholderText="E01"
+                            RequestedTheme="Light"
+                            Margin="-2"
+						    QuerySubmitted="SearchBox_QuerySubmitted" />
+                    </Border>
                 </Grid>
             </controls:ScrollHeader>
         </ListView.Header>

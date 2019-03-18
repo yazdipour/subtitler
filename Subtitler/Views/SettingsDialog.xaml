@@ -6,32 +6,37 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Title="SETTINGS"
-    SecondaryButtonText="Close">
+    SecondaryButtonText="Close"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+    <ContentDialog.Resources>
+        <Style TargetType="TextBlock" x:Key="Title">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Margin" Value="0 8"/>
+        </Style>
+    </ContentDialog.Resources>
     <StackPanel Orientation="Vertical" VerticalAlignment="Top" Spacing="4">
+        <TextBlock Text="SETTINGS" Style="{StaticResource Title}"/>
         <StackPanel Orientation="Horizontal" Spacing="8">
-            <TextBlock Text="Subtitles Language:" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-            <Button Content="{x:Bind settings.LanguageString}" Click="Button_Click" Width="80"
-                     VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBlock Text="Subtitles Language" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <Button Content="{x:Bind settings.LanguageString}" Click="Button_Click" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Spacing="8">
-            <TextBlock Text="Download as Zip:" VerticalAlignment="Center"/>
+            <TextBlock Text="Download as Zip" VerticalAlignment="Center"/>
             <ToggleSwitch IsOn="{x:Bind settings.ZipIt, Mode=TwoWay}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>
-        <!--<StackPanel>
-            <TextBlock Text="Dark Theme:"  />
-            <ToggleSwitch IsOn="{x:Bind settings.IsDarkTheme, Mode=TwoWay}"
-                          HorizontalAlignment="Left" IsEnabled="False"/>
+        <!--<StackPanel Orientation="Horizontal" Spacing="8">
+            <TextBlock Text="Dark Theme" VerticalAlignment="Center"/>
+            <ToggleSwitch x:Name="ThemeSwitch" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         </StackPanel>-->
-        <TextBlock Text="ABOUT" Style="{ThemeResource SubtitleTextBlockStyle}"/>
+        <TextBlock Text="ABOUT" Style="{StaticResource Title}"/>
         <TextBlock>
-            Developer: <Hyperlink NavigateUri="https://yazdipour.github.io">Shahriar Yazdipour</Hyperlink>
-            <LineBreak/>Open Source Repo: <Hyperlink NavigateUri="https://github.com/yazdipour/subtitler">github/yazdipour/subtitler</Hyperlink>
-            <LineBreak/><Hyperlink NavigateUri="https://yazdipour.github.io/policy.html">Privacy and Policy</Hyperlink>
-            <LineBreak/>Thanks <Hyperlink NavigateUri="http://subscene.com">http://subscene.com</Hyperlink> for providing subtitles
+            💠Developer: <Hyperlink NavigateUri="https://yazdipour.github.io">Shahriar Yazdipour</Hyperlink>
+            <LineBreak/>💠Open Source Repo: <Hyperlink NavigateUri="https://github.com/yazdipour/subtitler">github/yazdipour/subtitler</Hyperlink>
+            <LineBreak/>💠<Hyperlink NavigateUri="https://yazdipour.github.io/policy.html">Privacy and Policy</Hyperlink>
         </TextBlock>
 
-        <TextBlock Text="DONATE" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0 16 0 0"/>
+        <TextBlock Text="DONATE" Style="{StaticResource Title}"/>
         <HyperlinkButton HorizontalAlignment="Center" NavigateUri="https://buymeacoff.ee/XrTW5YQDy">
             <Image Height="32" Source="/Assets/_donate.png"/>
         </HyperlinkButton>
