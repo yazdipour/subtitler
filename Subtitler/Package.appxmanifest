@@ -1,13 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" 
-         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
-         xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" 
-         IgnorableNamespaces="uap mp">
-  <Identity Name="60cae3ef-0944-4d53-aca2-ddae41636a57" Publisher="CN=Master" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="60cae3ef-0944-4d53-aca2-ddae41636a57" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5" IgnorableNamespaces="uap mp">
+  <Identity Name="3783MINDPROJECTS.SUBTITLER" Publisher="CN=5055881C-9F85-4877-AEA1-AF64140AD34D" Version="5.0.6.0" />
+  <mp:PhoneIdentity PhoneProductId="67eea0e5-d1fb-467c-a882-803689ee6875" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Subtitler</DisplayName>
-    <PublisherDisplayName>Master</PublisherDisplayName>
+    <PublisherDisplayName>Yazdipour</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

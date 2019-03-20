@@ -50,7 +50,7 @@
 								PlaceholderSource="/Assets/_film_.jpg"
 								PlaceholderStretch="UniformToFill"
 								Stretch="UniformToFill" 
-                                Source="{x:Bind Movie.ImgSrc, Mode=OneWay}"/>
+                                Source="{Binding Movie.ImgSrc}"/>
 
                             <AppBarButton
 								Grid.RowSpan="2"
