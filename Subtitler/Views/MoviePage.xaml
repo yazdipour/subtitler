@@ -148,6 +148,8 @@
 						Symbol="Favorite" />
                     <StackPanel Orientation="Vertical">
                         <TextBlock
+                            MaxWidth="460"
+                            MaxLines="2"
 							Text="{x:Bind Name}"
 							TextWrapping="Wrap" />
                         <TextBlock

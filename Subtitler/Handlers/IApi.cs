@@ -17,6 +17,6 @@ namespace Subtitler.Handlers
         Task<T> GetMovieItems<T>([AliasAs("url")] string movieUrl, [AliasAs("lang")] int language = 0);
 
         [Get("/links.php")]
-        Task<string[]> GetSubtitleLinks([AliasAs("url")] string subtitleUrl);
+        Task<ObservableCollection<string>> GetSubtitleLinks([AliasAs("url")] string subtitleUrl);
     }
 }

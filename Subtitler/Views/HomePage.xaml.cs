@@ -7,8 +7,11 @@ namespace Subtitler.Views
 {
     public sealed partial class HomePage : Page
     {
+        private bool fisrtTime = true;
         private ObservableCollection<Movie> HomeList = new ObservableCollection<Movie>();
+
         public HomePage() => InitializeComponent();
+
         private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
             => Frame.Navigate(typeof(MoviePage), HomeList[lightStone.SelectedIndex]);
 
@@ -24,7 +27,12 @@ namespace Subtitler.Views
             }
             catch (System.Exception ex)
             {
-                Frame.Navigate(typeof(OfflinePage), ex.Message);
+                if (fisrtTime)
+                {
+                    fisrtTime = false;
+                    HomePage_LoadedAsync(sender, e);
+                }
+                else Frame.Navigate(typeof(OfflinePage), ex.Message);
             }
             finally
             {
