@@ -1,6 +1,8 @@
 ﻿using Subtitler.Handlers;
 using Subtitler.Models;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 
 namespace Subtitler.Views
@@ -21,11 +23,11 @@ namespace Subtitler.Views
             {
                 if (HomeList.Count != 0) return;
                 if (!Microsoft.Toolkit.Uwp.Connectivity.NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                    throw new System.Exception("The Internet is not Available");
+                    throw new Exception("The Internet is not Available");
                 MainPage.IsLoading = true;
                 foreach (var m in await ApiHandler.Api.GetHome()) HomeList.Add(m);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 if (fisrtTime)
                 {
@@ -37,6 +39,23 @@ namespace Subtitler.Views
             finally
             {
                 MainPage.IsLoading = false;
+                if (!await HasSeenDevNoteAsync())
+                {
+                    await new DevDialog().ShowAsync();
+                    await CacheHandler.Cache.InsertObject(R.DEV_NOTE_KEY, true);
+                }
+            }
+        }
+
+        private async Task<bool> HasSeenDevNoteAsync()
+        {
+            try
+            {
+                return await CacheHandler.Cache.GetObject<bool>(R.DEV_NOTE_KEY);
+            }
+            catch
+            {
+                return false;
             }
         }
     }
