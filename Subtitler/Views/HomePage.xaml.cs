@@ -15,7 +15,7 @@ namespace Subtitler.Views
         public HomePage() => InitializeComponent();
 
         private void Grid_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
-            => Frame.Navigate(typeof(MoviePage), HomeList[lightStone.SelectedIndex]);
+            => Frame.Navigate(typeof(MoviePage), sender is Grid grid ? grid.DataContext as Movie : HomeList[lightStone.SelectedIndex]);
 
         private async void HomePage_LoadedAsync(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
