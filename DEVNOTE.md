@@ -22,6 +22,4 @@ Here I want to answer a couple of your questions.
 
     App: https://github.com/yazdipour/subtitler
 
-5. Wanna Donate!?
-
-    [![Donate](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/XrTW5YQDy)
+5. Wanna Donate!? https://buymeacoff.ee/XrTW5YQDy
